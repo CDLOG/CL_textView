@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic) UITextView *textView;
 @property (strong, nonatomic)  UILabel *hintLable;
 @property (assign,nonatomic) NSInteger maxLength;
-
+@property (strong, nonatomic)  UILabel *textLenthLable;
+@property (assign,nonatomic) CGFloat radius;
 //初始化需要，大小，左边距，上边距，提示文字，最大文字
 -(instancetype)initWithFrame:(CGRect)frame
                     letfEdge:(CGFloat)leftedge

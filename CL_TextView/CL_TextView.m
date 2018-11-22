@@ -7,10 +7,9 @@
 //
 
 #import "CL_TextView.h"
-
+#import <Masonry.h>
 @interface CL_TextView()<UITextViewDelegate>
 
-@property (strong, nonatomic)  UILabel *textLenthLable;
 @end
 
 @implementation CL_TextView
@@ -31,14 +30,13 @@
         self.textView_topEdge = topedge;
         self.hintLable.text = hinttext;
         self.maxLength = maxlength;
-        self.textView = [[UITextView alloc]initWithFrame:CGRectMake(self.bounds.origin.x+self.textView_leftEdge, self.bounds.origin.y+self.textView_topEdge, self.bounds.size.width-self.textView_leftEdge*2, self.bounds.size.height-30)];
-        [[self.textView setBackgroundColor:UIColor clearColor]];
+        self.textView = [[UITextView alloc]initWithFrame:CGRectMake(self.bounds.origin.x+self.textView_leftEdge, self.bounds.origin.y+self.textView_topEdge, self.bounds.size.width-self.textView_leftEdge*2, self.bounds.size.height-34)];
+        [self.textView setBackgroundColor:[UIColor clearColor]];
     }
     return self;
 }
 
 - (void)drawRect:(CGRect)rect {
-    self.backgroundColor = [UIColor grayColor];
     
     
     [self addSubview:self.textView];
@@ -52,26 +50,24 @@
     [self.hintLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.textView).mas_offset(5);
         make.left.mas_equalTo(self.textView).mas_offset(5);
-        make.width.mas_equalTo(self.textView.width-10);
+        make.width.mas_equalTo(self.textView.bounds.size.width-10);
     }];
 //    self.hintLable.text = @"这是提示文案，这是提示文案，这是提示文案，这是提示文案，这是提示文案，这是提示文案，这是提示文案，";
     self.hintLable.numberOfLines = 100;
     self.hintLable.font = [UIFont systemFontOfSize:15];
-    self.hintLable.textColor = [UIColor blackColor];
     self.hintLable.textAlignment = NSTextAlignmentLeft;
     [self.layer setMasksToBounds:YES];
-    [self.layer setCornerRadius:5.0];
+    [self.layer setCornerRadius:_radius];
     
     
     [self addSubview:self.textLenthLable];
     self.textLenthLable.text = [NSString stringWithFormat:@"0/%ld",(long)self.maxLength];
     [self.textLenthLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self).mas_offset(-5);
-        make.right.mas_equalTo(self).mas_offset(-10);
-        make.width.mas_equalTo(100);
+        make.right.mas_equalTo(self).mas_offset(-15);
+        make.width.mas_equalTo(200);
     }];
     self.textLenthLable.font = [UIFont systemFontOfSize:14];
-    self.textLenthLable.textColor = [UIColor redColor];
     self.textLenthLable.textAlignment = NSTextAlignmentRight;
 }
 
